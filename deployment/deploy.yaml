@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web-app-jenkins
+  name: web-app-jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-app-jenkins
+  template:
+    metadata:
+      labels:
+        app: web-app-jenkins
+    spec:
+      containers:
+      - image: minasaiedbasta/web-app-jenkins:v${BUILD_NUMBER}
+        name: web-app-jenkins
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources: {}

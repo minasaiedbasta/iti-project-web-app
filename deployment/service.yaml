@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web-app-jenkins-service
+  name: web-app-jenkins-service
+spec:
+  ports:
+  - name: web-app-jenkins-port
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web-app-jenkins
+  type: NodePort
+status:
+  loadBalancer: {}
