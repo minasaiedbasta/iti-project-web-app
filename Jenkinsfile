@@ -4,11 +4,6 @@ pipeline {
     
     stages {
         stage('Build and Push Docker Image') {
-            when {
-                expression {
-                    BRANCH_NAME == 'release'
-                }
-            }
             steps {
                 echo "Building docker image..."
                 script {
@@ -25,11 +20,6 @@ pipeline {
         }
         
         stage('Deploy Docker Image') {
-            when {
-                expression {
-                    BRANCH_NAME == 'dev' || BRANCH_NAME == 'test' || BRANCH_NAME == 'prod'
-                }
-            }
             steps {
                 echo 'Deploy the released Docker image'
                 script {
