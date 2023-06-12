@@ -10,7 +10,7 @@ spec:
     port: 80
     protocol: TCP
     targetPort: 80
-    NodePort: 30000
+    nodePort: 3000
   selector:
     app: web-app-jenkins
   type: NodePort
