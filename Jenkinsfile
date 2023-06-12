@@ -1,6 +1,10 @@
 #!/usr/bin/env groovy
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            label 'jenkins-ubuntu-slave'
+        }
+    }
     
     stages {
         stage('Build and Push Docker Image') {
