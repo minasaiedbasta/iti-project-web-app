@@ -39,8 +39,7 @@ pipeline {
                             mv deployment/deploy.yaml deployment/deploy.yaml.tmp
                             cat deployment/deploy.yaml.tmp | envsubst > deployment/deploy.yaml
                             rm -f deployment/deploy.yaml.tmp
-                            kubectl create namespace prod
-                            kubectl apply -f deployment  -n prod
+                            kubectl apply -f deployment
                         '''
                 }
             }
