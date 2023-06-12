@@ -1,7 +1,9 @@
 #!/usr/bin/env groovy
 pipeline {
     agent {
-        label 'jenkins-ubuntu-slave'
+        kubernetes {
+            label 'jenkins-ubuntu-slave'
+        }
     }
     
     stages {
