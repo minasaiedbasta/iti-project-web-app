@@ -25,32 +25,13 @@ pipeline {
             steps {
                 echo 'Deploy the released Docker image'
                 script {
-                    // withCredentials([file(credentialsId: 'kubernetes_config', variable: 'KUBECONFIG'),file(credentialsId: 'gke_sa_key', variable: 'GCLOUD')]) {
-                    //     sh '''
-                    //         export BUILD_NUMBER=$(cat ../build.txt)
-                    //         mv deployment/deploy.yaml deployment/deploy.yaml.tmp
-                    //         cat deployment/deploy.yaml.tmp | envsubst > deployment/deploy.yaml
-                    //         rm -f deployment/deploy.yaml.tmp
-                    //         gcloud auth activate-service-account jenkins@alien-paratext-388412.iam.gserviceaccount.com  --key-file="${GCLOUD}"
-                    //         kubectl apply -f deployment --kubeconfig ${KUBECONFIG}
-                    //     '''
-                    // }
-                    withCredentials([file(credentialsId: 'kubernetes_config', variable: 'KUBECONFIG'),file(credentialsId: 'gke_sa_key', variable: 'GCLOUD')]) {
-                        sh '''
-                            export BUILD_NUMBER=$(cat ../build.txt)
-                            mv deployment/deploy.yaml deployment/deploy.yaml.tmp
-                            cat deployment/deploy.yaml.tmp | envsubst > deployment/deploy.yaml
-                            rm -f deployment/deploy.yaml.tmp
-                            kubectl apply -f deployment --kubeconfig ${KUBECONFIG}
-                        '''
-                    }
-                        // sh '''
-                        //     export BUILD_NUMBER=$(cat ../build.txt)
-                        //     mv deployment/deploy.yaml deployment/deploy.yaml.tmp
-                        //     cat deployment/deploy.yaml.tmp | envsubst > deployment/deploy.yaml
-                        //     rm -f deployment/deploy.yaml.tmp
-                        //     kubectl apply -f deployment
-                        // '''
+                    sh '''
+                        export BUILD_NUMBER=$(cat ../build.txt)
+                        mv deployment/deploy.yaml deployment/deploy.yaml.tmp
+                        cat deployment/deploy.yaml.tmp | envsubst > deployment/deploy.yaml
+                        rm -f deployment/deploy.yaml.tmp
+                        kubectl apply -f deployment
+                    '''
                 }
             }
         }
