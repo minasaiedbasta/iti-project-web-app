@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo 'Deploy the released Docker image'
                 script {
-                    withCredentials([file(credentialsId: 'kubernetes_config', variable: 'KUBECONFIG'),file(credentialsId: 'gke_sa_key', variable: 'GCLOUD')]) {
+                    withCredentials([file(credentialsId: 'kubernetes_config', variable: 'KUBECONFIG')]) {
                         sh '''
                             export BUILD_NUMBER=$(cat ../build.txt)
                             mv deployment/deploy.yaml deployment/deploy.yaml.tmp
