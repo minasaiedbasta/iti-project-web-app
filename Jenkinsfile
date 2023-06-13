@@ -35,13 +35,22 @@ pipeline {
                     //         kubectl apply -f deployment --kubeconfig ${KUBECONFIG}
                     //     '''
                     // }
+                    withCredentials([file(credentialsId: 'kubernetes_config', variable: 'KUBECONFIG'),file(credentialsId: 'gke_sa_key', variable: 'GCLOUD')]) {
                         sh '''
                             export BUILD_NUMBER=$(cat ../build.txt)
                             mv deployment/deploy.yaml deployment/deploy.yaml.tmp
                             cat deployment/deploy.yaml.tmp | envsubst > deployment/deploy.yaml
                             rm -f deployment/deploy.yaml.tmp
-                            kubectl apply -f deployment
+                            kubectl apply -f deployment --kubeconfig ${KUBECONFIG}
                         '''
+                    }
+                        // sh '''
+                        //     export BUILD_NUMBER=$(cat ../build.txt)
+                        //     mv deployment/deploy.yaml deployment/deploy.yaml.tmp
+                        //     cat deployment/deploy.yaml.tmp | envsubst > deployment/deploy.yaml
+                        //     rm -f deployment/deploy.yaml.tmp
+                        //     kubectl apply -f deployment
+                        // '''
                 }
             }
         }
