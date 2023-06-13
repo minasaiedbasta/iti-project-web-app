@@ -32,7 +32,7 @@ pipeline {
                             cat deployment/deploy.yaml.tmp | envsubst > deployment/deploy.yaml
                             rm -f deployment/deploy.yaml.tmp
                             gcloud auth activate-service-account jenkins@alien-paratext-388412.iam.gserviceaccount.com  --key-file="${GCLOUD}"
-                            kubectl apply -f deployment --kubeconfig ${KUBECONFIG}
+                            kubectl apply -f deployment 
                         '''
                     }
                         // sh '''
