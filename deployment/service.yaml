@@ -9,7 +9,7 @@ spec:
   - name: web-app-jenkins-port
     port: 80
     protocol: TCP
-    targetPort: 3000
+    targetPort: 30000
   selector:
     app: web-app-jenkins
   type: LoadBalancer
