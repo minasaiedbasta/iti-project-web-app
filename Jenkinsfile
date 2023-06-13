@@ -31,7 +31,7 @@ pipeline {
                             mv deployment/deploy.yaml deployment/deploy.yaml.tmp
                             cat deployment/deploy.yaml.tmp | envsubst > deployment/deploy.yaml
                             rm -f deployment/deploy.yaml.tmp
-                            gcloud auth activate-service-account 324011934770-compute@developer.gserviceaccount.com  --key-file="${GCLOUD}"
+                            gcloud auth activate-service-account jenkins@alien-paratext-388412.iam.gserviceaccount.com  --key-file="${GCLOUD}"
                             gcloud container clusters get-credentials alien-paratext-388412-gke --region us-central1
                             kubectl apply -f deployment --kubeconfig ${KUBECONFIG} -n ${BRANCH_NAME}
                         '''
